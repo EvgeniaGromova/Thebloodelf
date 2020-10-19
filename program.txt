@@ -1,0 +1,248 @@
+#include <iostream>
+
+#include <string>
+
+#include <stdio.h>
+
+#include <io.h>
+
+
+using namespace std;
+
+
+void createFile() {
+
+	FILE* src;
+
+	char name[50];
+
+	cout << "Input the path to file: "; cin >> name;
+
+	if (fopen_s(&src, name, "w")) cout << "error of file creation" << endl;
+
+	else cout << "the file is created" << endl;
+
+	fclose(src);
+
+}
+
+
+void removeFile() 
+
+{
+
+	char name[50];
+
+	cout << "Input the path to file: "; cin >> name;
+
+	if (remove(name) != 0) cout << "Error of file remove. Check file name " << endl;
+
+	else cout << "The file is deleted" << endl;
+
+}
+
+
+void renameFile()
+
+{
+
+	char oldName[_MAX_PATH], newName[_MAX_PATH];
+
+	cout << "Input file path: "; cin >> oldName;
+
+	cout << "Input path and new file name: "; cin >> newName;
+
+	if (rename(oldName, newName) != 0) cout << "error, file is not renamed" << endl;
+
+	else cout << "The file is renamed" << endl;
+
+}
+
+
+void moveFile()
+
+{
+
+	char oldName[_MAX_PATH], newName[_MAX_PATH];
+
+	char path[70];
+
+	cout << "Input file path: "; cin >> oldName;
+
+	cout << "Input new file path "; cin >> newName;
+
+	if (rename(oldName, newName) != 0) cout << "error, file is not removed" << endl;
+
+	else cout << "The file is removed" << endl;
+
+}
+
+
+
+void showFile() {
+
+	FILE* src;
+
+	char name[50];
+
+	cout << "Input the path to file: "; cin >> name;
+
+	char str[256] = {0};
+
+	if (fopen_s(&src, name, "r")) cout << "error, file is not opened" << endl;
+
+	else cout << "The file content" << endl;
+
+	while (!feof(src))
+
+	{
+
+		fgets(str, 256, src);
+
+		cout <<str<<endl;
+
+	}
+
+	cout << endl;
+
+	fclose(src);
+
+}
+
+
+
+void main()
+
+{
+
+	char key;
+
+	bool ok = true;
+
+
+	do {
+
+		cout << "1. Create new file " << endl;
+
+		cout << "2. Delete the file " << endl;
+
+		cout << "3. Rename the file " << endl;
+
+		cout << "4. Move the file  " << endl;
+
+		cout << "5. Show the file content " << endl;
+
+		cout << "6. Exit " << endl;
+
+		cout << " Select the item: "; cin >> key;
+
+		cout << endl << endl;
+
+		switch (key)
+
+		{
+
+		case '1':
+
+		{
+
+			cout << "The creation of file" << endl;
+
+			createFile();
+
+			system("pause");
+
+			system("cls");
+
+			break;
+
+		}
+
+
+		case '2':
+
+		{
+
+			cout << "Remoove of file" << endl;
+
+			removeFile();
+
+			system("pause");
+
+			system("cls");
+
+			break;
+
+		}
+
+
+		case '3':
+
+		{
+
+			cout << "Rename of file" << endl;
+
+			renameFile();
+
+			system("pause");
+
+			system("cls");
+
+			break;
+
+		}
+
+		case '4':
+
+		{
+
+			moveFile();
+
+			system("pause");
+
+			system("cls");
+
+			break;
+
+		}
+
+		case '5':
+
+		{
+
+			showFile();
+
+			system("pause");
+
+			system("cls");
+
+			break;
+
+		}
+
+		case '6':
+
+		{
+
+			ok = false;
+
+			system("pause");
+
+			system("cls");
+
+			break;
+
+		}
+
+		default: break;
+
+
+	}
+
+
+	} while (ok);
+
+
+
+
+}
